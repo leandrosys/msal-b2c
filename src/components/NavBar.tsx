@@ -1,7 +1,14 @@
 import { useMsal, useIsAuthenticated } from "@azure/msal-react";
 import { loginRequest } from "../auth/authConfig";
 
-export default function NavBar() {
+type Page = "home" | "vulnerable";
+
+interface NavBarProps {
+  activePage: Page;
+  onNavigate: (page: Page) => void;
+}
+
+export default function NavBar({ activePage, onNavigate }: NavBarProps) {
   const { instance, accounts } = useMsal();
   const isAuthenticated = useIsAuthenticated();
 
@@ -35,6 +42,21 @@ export default function NavBar() {
           <path d="M10 17L6 13L7.41 11.59L10 14.17L16.59 7.58L18 9L10 17Z" fill="white" />
         </svg>
         <span>MSAL B2C — Demo Auth</span>
+      </div>
+
+      <div className="navbar-tabs">
+        <button
+          className={`nav-tab ${activePage === "home" ? "active" : ""}`}
+          onClick={() => onNavigate("home")}
+        >
+          Auth Code + PKCE (seguro)
+        </button>
+        <button
+          className={`nav-tab nav-tab-danger ${activePage === "vulnerable" ? "active" : ""}`}
+          onClick={() => onNavigate("vulnerable")}
+        >
+          Implicit flow (vulnerable)
+        </button>
       </div>
 
       <div className="navbar-actions">

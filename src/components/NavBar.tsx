@@ -1,7 +1,7 @@
 import { useMsal, useIsAuthenticated } from "@azure/msal-react";
 import { loginRequest } from "../auth/authConfig";
 
-type Page = "home" | "vulnerable";
+type Page = "home" | "implicit" | "code-interception";
 
 interface NavBarProps {
   activePage: Page;
@@ -52,10 +52,16 @@ export default function NavBar({ activePage, onNavigate }: NavBarProps) {
           Auth Code + PKCE (seguro)
         </button>
         <button
-          className={`nav-tab nav-tab-danger ${activePage === "vulnerable" ? "active" : ""}`}
-          onClick={() => onNavigate("vulnerable")}
+          className={`nav-tab nav-tab-danger ${activePage === "implicit" ? "active" : ""}`}
+          onClick={() => onNavigate("implicit")}
         >
           Implicit flow (vulnerable)
+        </button>
+        <button
+          className={`nav-tab nav-tab-danger ${activePage === "code-interception" ? "active" : ""}`}
+          onClick={() => onNavigate("code-interception")}
+        >
+          Code sin PKCE (vulnerable)
         </button>
       </div>
 

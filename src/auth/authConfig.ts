@@ -21,6 +21,7 @@ export const B2C_AUTHORITY = `https://${TENANT_DOMAIN}/${TENANT_ONMICROSOFT}/${P
 // Scopes definidos en el registro de aplicación de B2C
 export const API_SCOPE = `https://${TENANT_DOMAIN}/leandro-portal/Afiliados`;
 export const API_SCOPE_IMPERSONATION = `https://${TENANT_DOMAIN}/leandro-portal/user_impersonation`;
+export const API_SCOPE_ACCOUNTS_READ = `https://${TENANT_DOMAIN}/leandro-portal/Accounts.Read`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Configuración principal de MSAL

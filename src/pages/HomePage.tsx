@@ -1,9 +1,10 @@
+import { useState } from "react";
 import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
   useMsal,
 } from "@azure/msal-react";
-import { loginRequest } from "../auth/authConfig";
+import { loginRequest, API_SCOPE_ACCOUNTS_READ } from "../auth/authConfig";
 import PkceFlowDiagram from "../components/PkceFlowDiagram";
 import MsalConfigViewer from "../components/MsalConfigViewer";
 import UserProfile from "../components/UserProfile";
@@ -11,6 +12,14 @@ import TokenViewer from "../components/TokenViewer";
 
 function LandingSection() {
   const { instance } = useMsal();
+  const [includeAccountsRead, setIncludeAccountsRead] = useState(false);
+
+  const buildRequest = () => ({
+    ...loginRequest,
+    scopes: includeAccountsRead
+      ? [...loginRequest.scopes, API_SCOPE_ACCOUNTS_READ]
+      : loginRequest.scopes,
+  });
 
   return (
     <div>
@@ -27,16 +36,29 @@ function LandingSection() {
             Inicia sesión para ver los tokens, claims y cómo funciona la
             renovación silenciosa.
           </p>
+
+          <label className="scope-toggle">
+            <input
+              type="checkbox"
+              checked={includeAccountsRead}
+              onChange={(e) => setIncludeAccountsRead(e.target.checked)}
+            />
+            <span>Incluir scope <code>Accounts.Read</code></span>
+          </label>
+          {includeAccountsRead && (
+            <p className="scope-toggle-detail">{API_SCOPE_ACCOUNTS_READ}</p>
+          )}
+
           <div className="hero-buttons">
             <button
               className="btn btn-primary btn-lg"
-              onClick={() => instance.loginRedirect(loginRequest)}
+              onClick={() => instance.loginRedirect(buildRequest())}
             >
               Iniciar sesión (Redirect)
             </button>
             <button
               className="btn btn-outline btn-lg"
-              onClick={() => instance.loginPopup(loginRequest)}
+              onClick={() => instance.loginPopup(buildRequest())}
             >
               Iniciar sesión (Popup)
             </button>

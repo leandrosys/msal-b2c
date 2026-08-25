@@ -63,6 +63,9 @@ code { font-family: var(--mono); font-size: 0.82rem; background: var(--ms-blue-l
 .hero-content p { color: var(--text-muted); max-width: 600px; }
 .hero-buttons { display: flex; gap: 0.75rem; margin: 1.25rem 0 0.75rem; flex-wrap: wrap; }
 .hint { font-size: 0.82rem; color: var(--text-light); margin-top: 0.5rem; }
+.scope-toggle { display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0 0.25rem; cursor: pointer; font-size: 0.875rem; user-select: none; }
+.scope-toggle input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--ms-blue); cursor: pointer; flex-shrink: 0; }
+.scope-toggle-detail { font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted); margin: 0 0 0.25rem; }
 .subtitle { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.25rem; }
 
 /* ── PKCE Flow ─────────────────────────────────────────────────────────── */
